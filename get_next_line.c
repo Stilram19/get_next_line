@@ -6,7 +6,7 @@
 /*   By: obednaou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/30 17:55:57 by obednaou          #+#    #+#             */
-/*   Updated: 2022/10/31 15:06:11 by obednaou         ###   ########.fr       */
+/*   Updated: 2022/10/31 15:46:38 by obednaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,6 @@ char	*get_next_line(int fd)
 	if (!(fd >= 0 || BUFFER_SIZE > 0))
 		return (0);
 	grab_next_line(&permanent_buffer, fd);
-	clean_it_up(permanent_buffer, &line);
+	clean_it_up(&permanent_buffer, &line);
 	return (line);
 }

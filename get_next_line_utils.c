@@ -6,7 +6,7 @@
 /*   By: obednaou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/30 17:56:14 by obednaou          #+#    #+#             */
-/*   Updated: 2022/10/31 15:06:15 by obednaou         ###   ########.fr       */
+/*   Updated: 2022/10/31 15:50:49 by obednaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,29 @@ char	*ft_strchr(const char *s, int c)
 
 void	update_static(char **ptr_to_static)
 {
-		
+	size_t	i;
+	size_t	j;
+	size_t	len;
+	char	*buff;
+
+	i = 0;
+	j = 0;
+	len = _ft_strlen(*ptr_to_static, 0);
+	len -= _ft_strlen(*ptr_to_static, 10) + 1;
+	if (len <= 0)
+	{
+		kicking_leaks_away(0, ptr_to_static);
+		return ;
+	}
+	buff = malloc(sizeof(char) * (len + 1));
+	while (*(*ptr_to_static + i) + 10)
+		i++;
+	i++
+	while (*(*ptr_to_static + i + j))
+		*(buff + j++) = *(*ptr_to_static + i + j);
+	*(buff + j) = 0;
+	free(*ptr_to_static);
+	*ptr_to_static = buff;
 }
 
 void	kicking_leaks_away(void *ptr1, void **ptr2)
