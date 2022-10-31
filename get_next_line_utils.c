@@ -6,11 +6,32 @@
 /*   By: obednaou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/30 17:56:14 by obednaou          #+#    #+#             */
-/*   Updated: 2022/10/31 14:06:17 by obednaou         ###   ########.fr       */
+/*   Updated: 2022/10/31 15:06:15 by obednaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+
+char	*ft_strchr(const char *s, int c)
+{
+	size_t	i;
+
+	i = 0;
+	while (*(s + i))
+	{
+		if (*(s + i) == (char)c)
+			return ((char *)s + i);
+		i++;
+	}
+	if (!(char)c)
+		return ((char *)s + i);
+	return (0);
+}
+
+void	update_static(char **ptr_to_static)
+{
+		
+}
 
 void	kicking_leaks_away(void *ptr1, void **ptr2)
 {
@@ -60,4 +81,3 @@ int	ft_strjoin(char **ptr_to_static, void *buff)
 	*ptr_to_static = join_buff;
 	return (1);
 }
-

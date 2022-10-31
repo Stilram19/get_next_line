@@ -6,39 +6,33 @@
 /*   By: obednaou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/30 17:55:57 by obednaou          #+#    #+#             */
-/*   Updated: 2022/10/31 14:05:16 by obednaou         ###   ########.fr       */
+/*   Updated: 2022/10/31 15:06:11 by obednaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*clean_it_up(char **ptr_to_static)
+void	clean_it_up(char **ptr_to_static, char **ptr_to_line)
 {
-	char	*buff1;
-	char	*buff2;
-	int		len1;
-	int		len2;
+	size_t	i;
+	size_t	line_len;
 
-	if (!(*ptr_to_static))
+	i = 0;
+	if (*ptr_to_static)
+		line_len = _ft_strlen(*ptr_to_static, 10);
+	if (!line_len || !(*permanent_buff))
+	{
+		*ptr_to_line = 0;
 		return (0);
-	len1 = _ft_strlen(*ptr_to_static, 10);
-	len2 = _ft_strlen(*ptr_to_static + len1, 0);
-	if (!len1)
-		buff1 = 0;
-	else
-		buff1 = malloc(sizeof(char) * (len1 + 1));
-	if (!len2)
-		buff2 = 0;
-	else
-		buff2 = malloc(sizeof(char) * (len2 + 1));
-	*(buff1 + len1) = 0;
-	while (buff2 && len2 >= len1 - 1)
-		*(buff2 + len2--) = *(*ptr_to_static + len1);
-	while (buff2 && len2--)
-		*(buff2 + len2) = *(*ptr_to_static + len2);
-	free(*ptr_to_static);
-	*ptr_to_static = buff1;
-	return (buff2);
+	}
+	*ptr_to_line = malloc(sizeof(char) * (line_line + 1));
+	while (i < line_line)
+	{
+		*(*ptr_to_line + i) = *(*ptr_to_static + i);
+		i++;
+	}
+	*(*ptr_to_line + i) = 0;
+	update_static(ptr_to_static);
 }
 
 void	grab_next_line(char **ptr_to_static, int fd)
@@ -75,6 +69,6 @@ char	*get_next_line(int fd)
 	if (!(fd >= 0 || BUFFER_SIZE > 0))
 		return (0);
 	grab_next_line(&permanent_buffer, fd);
-	clean_it_up(&line, permanent_buffer);
+	clean_it_up(permanent_buffer, &line);
 	return (line);
 }
