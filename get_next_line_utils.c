@@ -6,7 +6,7 @@
 /*   By: obednaou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/30 17:56:14 by obednaou          #+#    #+#             */
-/*   Updated: 2022/10/31 15:50:49 by obednaou         ###   ########.fr       */
+/*   Updated: 2022/10/31 18:38:53 by obednaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,26 +36,26 @@ void	update_static(char **ptr_to_static)
 	char	*buff;
 
 	i = 0;
-	j = 0;
+	j = -1;
 	len = _ft_strlen(*ptr_to_static, 0);
-	len -= _ft_strlen(*ptr_to_static, 10) + 1;
+	len -= _ft_strlen(*ptr_to_static, 10);
 	if (len <= 0)
 	{
 		kicking_leaks_away(0, ptr_to_static);
 		return ;
 	}
 	buff = malloc(sizeof(char) * (len + 1));
-	while (*(*ptr_to_static + i) + 10)
+	while (*(*ptr_to_static + i) - 10)
 		i++;
-	i++
-	while (*(*ptr_to_static + i + j))
-		*(buff + j++) = *(*ptr_to_static + i + j);
+	i++;
+	while (*(*ptr_to_static + i + ++j))
+		*(buff + j) = *(*ptr_to_static + i + j);
 	*(buff + j) = 0;
 	free(*ptr_to_static);
 	*ptr_to_static = buff;
 }
 
-void	kicking_leaks_away(void *ptr1, void **ptr2)
+void	kicking_leaks_away(void *ptr1, char **ptr2)
 {
 	if (ptr1)
 		free(ptr1);
@@ -73,32 +73,29 @@ size_t	_ft_strlen(const char *str, int end)
 	i = 0;
 	while (str && *(str + i) && *(str + i) != end)
 		i++;
+	if (*(str + i) == 10)
+		i++;
 	return (i);
 }
 
-int	ft_strjoin(char **ptr_to_static, void *buff)
+int	_ft_strjoin(char **ptr_to_static, char *buff)
 {
 	size_t	i;
 	size_t	j;
 	size_t	size;
 	char	*join_buff;
 
-	i = 0;
-	j = 0;
-	size = ft_strlen(*ptr_to_static, 0) + ft_strlen(buff, 0) + 1;
+	i = -1;
+	j = -1;
+	size = _ft_strlen(*ptr_to_static, 0) + _ft_strlen(buff, 0) + 1;
 	join_buff = malloc(size * sizeof(char));
 	if (!join_buff)
 		return (-1);
-	while (*ptr_to_static && *(*ptr_to_static + i))
-	{
+	while (*ptr_to_static && *(*ptr_to_static + ++i))
 		*(join_buff + i) = *(*ptr_to_static + i);
-		i++;
-	}
-	while (*(buff + j))
-	{
+	while (*(buff + ++j))
 		*(join_buff + i + j) = *(buff + j);
-		j++;	
-	}
+	*(buff + i + j) = 0;
 	kicking_leaks_away(buff, ptr_to_static);
 	*ptr_to_static = join_buff;
 	return (1);

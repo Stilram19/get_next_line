@@ -6,7 +6,7 @@
 /*   By: obednaou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/30 17:56:36 by obednaou          #+#    #+#             */
-/*   Updated: 2022/10/31 15:55:34 by obednaou         ###   ########.fr       */
+/*   Updated: 2022/10/31 16:43:54 by obednaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,12 @@
 #  define BUFFER_SIZE 1
 # endif
 
-int		_ft_strjoin(char **ptr_to_static, void *buff);
+int		_ft_strjoin(char **ptr_to_static, char *buff);
 void	update_static(char **ptr_to_static);
 void	clean_it_up(char **permanent_buff, char **ptr_to_line);
-void	kicking_leaks_away(void *ptr1, void **ptr2);
+void	kicking_leaks_away(void *ptr1, char **ptr2);
 void	grab_next_line(char **ptr_to_static, int fd);
-size_t	_ft_strlen(const char *str);
 char	*ft_strchr(const char *s, int c);
 char	*get_next_line(int fd);
-
+size_t	_ft_strlen(const char *str, int end);
 #endif
