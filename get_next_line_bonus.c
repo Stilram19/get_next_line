@@ -6,7 +6,7 @@
 /*   By: obednaou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 14:41:24 by obednaou          #+#    #+#             */
-/*   Updated: 2022/11/02 14:46:35 by obednaou         ###   ########.fr       */
+/*   Updated: 2022/11/02 15:45:20 by obednaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,9 +64,9 @@ void	grab_next_line(char **ptr_to_static, int fd)
 char	*get_next_line(int fd)
 {
 	char		*line;
-	static char	*permanent_buffers[256];
+	static char	*permanent_buffers[UD_OPEN_MAX];
 
-	if (!(fd >= 0 && fd < 256 && BUFFER_SIZE > 0))
+	if (!(fd >= 0 && fd < UD_OPEN_MAX && BUFFER_SIZE > 0))
 		return (0);
 	grab_next_line(permanent_buffers + fd, fd);
 	clean_it_up(permanent_buffers + fd, &line);

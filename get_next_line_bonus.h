@@ -6,7 +6,7 @@
 /*   By: obednaou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 14:41:54 by obednaou          #+#    #+#             */
-/*   Updated: 2022/11/02 14:46:27 by obednaou         ###   ########.fr       */
+/*   Updated: 2022/11/02 15:47:08 by obednaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 # include <unistd.h>
 # include <stdlib.h>
+
+# define UD_OPEN_MAX 10240
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 1
