@@ -6,7 +6,7 @@
 /*   By: obednaou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/30 17:55:57 by obednaou          #+#    #+#             */
-/*   Updated: 2022/10/31 18:23:46 by obednaou         ###   ########.fr       */
+/*   Updated: 2022/11/02 10:47:02 by obednaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,13 @@ void	clean_it_up(char **ptr_to_static, char **ptr_to_line)
 
 	i = 0;
 	if (*ptr_to_static)
+	{
 		line_len = _ft_strlen(*ptr_to_static, 10);
-	if (*ptr_to_static)
 		*ptr_to_line = malloc(sizeof(char) * (line_len + 1));
+	}
 	if (!(*ptr_to_line && *ptr_to_static))
 	{
-		kicking_leaks_away(*ptr_to_line, ptr_to_static);
+		kicking_leaks_away(0, ptr_to_static);
 		*ptr_to_line = 0;
 		return ;
 	}
@@ -46,21 +47,18 @@ void	grab_next_line(char **ptr_to_static, int fd)
 	buff = malloc((BUFFER_SIZE + 1) * sizeof(char));
 	if (buff)
 		sys_call_ret = read(fd, buff, BUFFER_SIZE);
-	if (!sys_call_ret)
-		sys_call_ret = -1;
 	while (buff && sys_call_ret && (sys_call_ret + 1))
 	{
-		*(buff + BUFFER_SIZE) = 0;
+		*(buff + sys_call_ret) = 0;
 		sys_call_ret = _ft_strjoin(ptr_to_static, buff);
 		if ((sys_call_ret + 1) && ft_strchr(*ptr_to_static, 10))
-			return ;
-		if (sys_call_ret + 1)
-			buff = malloc((BUFFER_SIZE + 1) * sizeof(char));
-		if ((sys_call_ret + 1) && buff)
+			break ;
+		if ((sys_call_ret + 1))
 			sys_call_ret = read(fd, buff, BUFFER_SIZE);
 	}
-	if (!(sys_call_ret + 1))
-		kicking_leaks_away(buff, ptr_to_static);
+	if (!(sys_call_ret + 1) || !buff)
+		kicking_leaks_away(0, ptr_to_static);
+	free(buff);
 }
 
 char	*get_next_line(int fd)

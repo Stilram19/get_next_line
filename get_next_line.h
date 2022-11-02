@@ -6,7 +6,7 @@
 /*   By: obednaou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/30 17:56:36 by obednaou          #+#    #+#             */
-/*   Updated: 2022/10/31 16:43:54 by obednaou         ###   ########.fr       */
+/*   Updated: 2022/11/02 12:31:29 by obednaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <stdlib.h>
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 1
+#  define BUFFER_SIZE 10
 # endif
 
 int		_ft_strjoin(char **ptr_to_static, char *buff);
