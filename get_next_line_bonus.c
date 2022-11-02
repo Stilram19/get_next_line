@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: obednaou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/30 17:55:57 by obednaou          #+#    #+#             */
-/*   Updated: 2022/11/02 14:42:23 by obednaou         ###   ########.fr       */
+/*   Created: 2022/11/02 14:41:24 by obednaou          #+#    #+#             */
+/*   Updated: 2022/11/02 14:46:35 by obednaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 void	clean_it_up(char **ptr_to_static, char **ptr_to_line)
 {
@@ -64,11 +64,11 @@ void	grab_next_line(char **ptr_to_static, int fd)
 char	*get_next_line(int fd)
 {
 	char		*line;
-	static char	*permanent_buffer;
+	static char	*permanent_buffers[256];
 
-	if (!(fd >= 0 && BUFFER_SIZE > 0))
+	if (!(fd >= 0 && fd < 256 && BUFFER_SIZE > 0))
 		return (0);
-	grab_next_line(&permanent_buffer, fd);
-	clean_it_up(&permanent_buffer, &line);
+	grab_next_line(permanent_buffers + fd, fd);
+	clean_it_up(permanent_buffers + fd, &line);
 	return (line);
 }
