@@ -61,6 +61,9 @@ void	grab_next_line(char **ptr_to_static, int fd)
 	free(buff);
 }
 
+// @param fd the file descriptor of the file you want to process line by line.
+//  @return the next line of the file pointed to by fd.
+//   @attention you have to free the returned pointers after you're done processing the current line, to prevent memory leaks.
 char	*get_next_line(int fd)
 {
 	char		*line;

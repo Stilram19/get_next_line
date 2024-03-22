@@ -2,17 +2,18 @@
 
 ## About
 
-get_next_line is a C program designed to read lines from a file descriptor, providing a simple and efficient way to process text input line by line. 
-Implemented exclusively using the write function (or system call), this project maintains a buffer that reads data in chunks of a specified size. 
+get_next_line is a C function designed to read lines from a file descriptor, providing a simple and efficient way to process text input line by line. 
+Implemented exclusively using only the read system call as an external functionality, this project maintains a buffer that reads data in chunks of a specified size. 
 Once a complete line is detected within the buffer, it is returned to the caller. This implementation offers versatility and reliability, 
-making it suitable for a wide range of applications where line-by-line processing is required.. Here is the link to the [subject](https://cdn.intra.42.fr/pdf/pdf/126102/en.subject.pdf)
+making it suitable for a wide range of c applications where line-by-line processing is required.. Here is the link to the [subject](https://cdn.intra.42.fr/pdf/pdf/126102/en.subject.pdf)
 
 ## What I learned from this project:
 
 During the development of this project, I've learned several important concepts including:
 
-- **Core concepts**: Static variables, I/O buffering, maintaining a permanent buffer (static variable), the code works with all read buffer sizes, managing memory leaks.
-- **Memory management**: managing memory leaks
+- **Core concepts**: I/O buffering, State management, Static variables, learning how to create a buffer-agnostic solution (doesn't care about size).
+- **Memory management**: managing memory leaks, since I had to allocate memory dynamically in the heap.
+- **Memory layout of programs**: focusing on [Data segment](https://en.wikipedia.org/wiki/Data_segment).
 - **Makefile**: using Makefile to automate the compilation process ,archive creation and dependencies management.
 - **Git**: Using git to commit and push to github or the 42-intra vogsphere
 - **Documentation**: Practiced writing clear and informative documentation, such as this README.md file, to aid users and contributors.
@@ -39,21 +40,35 @@ To use my get_next_line function
     cd get_next_line
     ```
 
-3. Include all the code in your c project, and use the get_next_line function to process a text input file line by line:
+3. Use the get_next_line function in your c project:
 
-   ``` char *get_next_line(int fd);
+   - Description:
+
+   ```c
+   char *get_next_line(int fd);
+   ```
    - fd: the file descriptor of the file you want to process line by line.
    - returned value: the next line read from the file.
    - You have to be freeing the returned pointers, to prevent [memory leaks](https://en.wikipedia.org/wiki/Memory_leak).
 
+   [!WARNING]
+   There are two versions of the function:
+
+   - If your program needs to read from only one file descriptor during its whole lifetime, use the function implemented in the following files:
+      get_next_line.c, get_next_line_utils.c
+
+   - If your program may need to read from multiple file descriptors, use the function implemented in the following files:
+      get_next_line_bonus.c, get_next_line_utils_bonus.c
 
 ## Concepts you cannot do without (for students):
 
+- [Data segment](https://en.wikipedia.org/wiki/Data_segment)
 - [memory leaks](https://en.wikipedia.org/wiki/Memory_leak)
+- [I/O Buffers](https://stackoverflow.com/questions/27993971/understanding-buffering-in-c)
+- [static variables](https://www.geeksforgeeks.org/static-variables-in-c/)
 - [stack frame](https://en.wikipedia.org/wiki/Call_stack)
 - [pointers](https://en.wikipedia.org/wiki/Pointer_(computer_programming))  
 - [Endianness](https://en.wikipedia.org/wiki/Endianness)  
 - [Pointer arithmetic](https://www.geeksforgeeks.org/pointer-arithmetics-in-c-with-examples/)  
 - [two's complement](https://en.wikipedia.org/wiki/Two%27s_complement)    
 - [integer promotion](https://www.geeksforgeeks.org/integer-promotions-in-c/)
-- [I/O Buffers](https://stackoverflow.com/questions/27993971/understanding-buffering-in-c)
