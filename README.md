@@ -11,7 +11,7 @@ making it suitable for a wide range of c applications where line-by-line process
 
 During the development of this project, I've learned several important concepts including:
 
-- **Core concepts**: I/O buffering, State management, Static variables, learning how to create a buffer-agnostic solution (doesn't care about size).
+- **Core concepts**: I/O buffering, State management, Static variables, learning how to create a bufferSize-agnostic solution.
 - **Memory management**: managing memory leaks, since I had to allocate memory dynamically in the heap.
 - **Memory layout of programs**: focusing on [Data segment](https://en.wikipedia.org/wiki/Data_segment).
 - **Makefile**: using Makefile to automate the compilation process ,archive creation and dependencies management.
