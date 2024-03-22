@@ -51,8 +51,7 @@ To use my get_next_line function
    - returned value: the next line read from the file.
    - You have to be freeing the returned pointers, to prevent [memory leaks](https://en.wikipedia.org/wiki/Memory_leak).
 
-   [!WARNING]
-   There are two versions of the function:
+> :warning: **There are two versions of the function: **: Be very careful here!
 
    - If your program needs to read from only one file descriptor during its whole lifetime, use the function implemented in the following files:
       get_next_line.c, get_next_line_utils.c
